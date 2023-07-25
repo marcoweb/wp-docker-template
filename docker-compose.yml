@@ -4,6 +4,7 @@ services:
 
   wordpress:
     image: wordpress
+    container_name: wordpress
     restart: always
     ports:
       - 8080:80
@@ -18,11 +19,12 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: mysql
     restart: always
     environment:
       MYSQL_DATABASE: wpdb
       MYSQL_USER: wpuser
       MYSQL_PASSWORD: wppass
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_ROOT_PASSWORD: rootpass
     volumes:
-      - ./server/data:/var/lib/mysql
+      - ./assets/data:/docker-entrypoint-initdb.d
